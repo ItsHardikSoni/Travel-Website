@@ -1,38 +1,60 @@
+"use client"
+
+import { useNavigate } from "react-router-dom"
 import { Link } from "react-router-dom"
 import { Phone } from "lucide-react"
 
 const domesticPlaces = [
   {
     id: 1,
-    image: "/manali-vista.png",
+    image: "https://source.unsplash.com/random/600x400/?manali,mountains",
     name: "Manali",
     description: "Experience the beauty of snow-capped mountains and lush valleys.",
     price: "₹15,999",
+    date: "April 21, 2025",
+    time: "2:30 PM - 5:30 PM",
+    location: "Himachal Pradesh, India",
   },
   {
     id: 2,
-    image: "/goan-sunset-serenity.png",
+    image: "https://source.unsplash.com/random/600x400/?goa,beach,sunset",
     name: "Goa",
     description: "Relax on pristine beaches and enjoy vibrant nightlife.",
     price: "₹12,499",
+    date: "May 15, 2025",
+    time: "3:00 PM - 6:00 PM",
+    location: "Goa, India",
   },
   {
     id: 3,
-    image: "/kerala.jpg",
+    image: "https://source.unsplash.com/random/600x400/?kerala,backwaters",
     name: "Kerala",
     description: "Explore the serene backwaters and lush green landscapes.",
     price: "₹18,999",
+    date: "June 10, 2025",
+    time: "1:30 PM - 4:30 PM",
+    location: "Kerala, India",
   },
   {
     id: 4,
-    image: "/rajasthan.jpg",
+    image: "https://source.unsplash.com/random/600x400/?rajasthan,palace",
     name: "Rajasthan",
     description: "Discover the royal heritage and magnificent palaces.",
     price: "₹16,499",
+    date: "July 5, 2025",
+    time: "2:00 PM - 5:00 PM",
+    location: "Rajasthan, India",
   },
 ]
 
 export default function DomesticPlaces() {
+  const navigate = useNavigate()
+
+  const handleRequestCallback = (place) => {
+    // Navigate to the trip customization page with the place data
+    navigate("/customize-trip", { state: { place } })
+  }
+
   return (
     <section className="py-16 bg-[#f2f2f2]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -57,7 +79,10 @@ export default function DomesticPlaces() {
                   <span className="text-lg font-bold text-[#be4f0a]">{place.price}</span>
                   <span className="text-sm text-[#808080]">Per person</span>
                 </div>
-                <button className="flex w-full items-center justify-center rounded-md bg-[#be4f0a] px-4 py-2 text-white hover:bg-[#a3450a] focus:outline-none focus:ring-2 focus:ring-[#be4f0a] focus:ring-offset-2">
+                <button
+                  className="flex w-full items-center justify-center rounded-md bg-[#be4f0a] px-4 py-2 text-white hover:bg-[#a3450a] focus:outline-none focus:ring-2 focus:ring-[#be4f0a] focus:ring-offset-2"
+                  onClick={() => handleRequestCallback(place)}
+                >
                   <Phone className="mr-2 h-4 w-4" /> Request Callback
                 </button>
               </div>

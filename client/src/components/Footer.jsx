@@ -40,11 +40,6 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="text-[#b3b3b3] hover:text-[#be4f0a]">
-                  About Us
-                </Link>
-              </li>
-              <li>
                 <Link to="/tour" className="text-[#b3b3b3] hover:text-[#be4f0a]">
                   Tours
                 </Link>
@@ -52,6 +47,11 @@ export default function Footer() {
               <li>
                 <Link to="/blog" className="text-[#b3b3b3] hover:text-[#be4f0a]">
                   Blog
+                </Link>
+              </li>
+              <li>
+                <Link to="/about" className="text-[#b3b3b3] hover:text-[#be4f0a]">
+                  About Us
                 </Link>
               </li>
               <li>

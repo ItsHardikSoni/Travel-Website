@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
 
 const slides = [
   {
@@ -67,21 +66,6 @@ export default function HeroSection() {
           </div>
         </div>
       ))}
-
-      <button
-        onClick={prevSlide}
-        className="absolute left-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/30 p-2 text-white hover:bg-black/50"
-        aria-label="Previous slide"
-      >
-        <ChevronLeft className="h-6 w-6" />
-      </button>
-      <button
-        onClick={nextSlide}
-        className="absolute right-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/30 p-2 text-white hover:bg-black/50"
-        aria-label="Next slide"
-      >
-        <ChevronRight className="h-6 w-6" />
-      </button>
 
       <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 space-x-2">
         {slides.map((_, index) => (

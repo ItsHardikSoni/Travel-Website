@@ -7,59 +7,29 @@ import Footer from "./components/Footer"
 import Home from "./pages/Home"
 import About from "./pages/About"
 import Blog from "./pages/Blog"
+import BlogPost from "./pages/BlogPost"
 import Contact from "./pages/Contact"
 import Tour from "./pages/Tour"
+import TripCustomizationPage from "./pages/TripCustomizationPage"
+import SearchResults from "./pages/SearchResults"
 import ScrollToTop from "./components/ScrollToTop"
-import PageTransition from "./components/PageTransition"
 import "./index.css"
 
-// AnimatePresence needs to be used with a location to work properly with routes
+// Separate component for animated routes
 function AnimatedRoutes() {
   const location = useLocation()
 
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
-        <Route
-          path="/"
-          element={
-            <PageTransition>
-              <Home />
-            </PageTransition>
-          }
-        />
-        <Route
-          path="/about"
-          element={
-            <PageTransition>
-              <About />
-            </PageTransition>
-          }
-        />
-        <Route
-          path="/blog"
-          element={
-            <PageTransition>
-              <Blog />
-            </PageTransition>
-          }
-        />
-        <Route
-          path="/contact"
-          element={
-            <PageTransition>
-              <Contact />
-            </PageTransition>
-          }
-        />
-        <Route
-          path="/tour"
-          element={
-            <PageTransition>
-              <Tour />
-            </PageTransition>
-          }
-        />
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:id" element={<BlogPost />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/tour" element={<Tour />} />
+        <Route path="/customize-trip" element={<TripCustomizationPage />} />
+        <Route path="/search" element={<SearchResults />} />
       </Routes>
     </AnimatePresence>
   )

@@ -1,8 +1,31 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { useLocation } from "react-router-dom"
+import { motion } from "framer-motion"
+import { useLocation, useNavigate } from "react-router-dom"
 import { Phone, Filter, MapPin, Calendar, Users } from "lucide-react"
+
+// Animation variants
+const pageVariants = {
+  initial: {
+    opacity: 0,
+    y: 20,
+  },
+  in: {
+    opacity: 1,
+    y: 0,
+  },
+  out: {
+    opacity: 0,
+    y: -20,
+  },
+}
+
+const pageTransition = {
+  type: "tween",
+  ease: "anticipate",
+  duration: 0.5,
+}
 
 const tours = [
   {
@@ -101,7 +124,7 @@ export default function Tour() {
     state: "",
     trending: false,
   })
-
+  const navigate = useNavigate()
   const location = useLocation()
 
   useEffect(() => {
@@ -143,8 +166,32 @@ export default function Tour() {
     setFilter((prev) => ({ ...prev, trending: e.target.checked }))
   }
 
+  const handleRequestCallback = (tour) => {
+    // Extract days and nights from duration string
+    const durationMatch = tour.duration.match(/(\d+)\s*Days\s*\/\s*(\d+)\s*Nights/)
+    const days = durationMatch ? Number.parseInt(durationMatch[1]) : 3
+    const nights = durationMatch ? Number.parseInt(durationMatch[2]) : 2
+
+    // Create enhanced tour object with days and nights
+    const enhancedTour = {
+      ...tour,
+      days,
+      nights,
+    }
+
+    // Navigate to the trip customization page with the tour data
+    navigate("/customize-trip", { state: { place: enhancedTour } })
+  }
+
   return (
-    <main className="min-h-screen py-16">
+    <motion.main
+      className="relative min-h-screen py-16"
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={pageVariants}
+      transition={pageTransition}
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-12 text-center">
           <h1 className="text-4xl font-bold text-[#1a1a1a] sm:text-5xl">Our Tours</h1>
@@ -246,7 +293,10 @@ export default function Tour() {
                         <span className="text-sm text-[#808080]">Per person</span>
                       </div>
 
-                      <button className="flex w-full items-center justify-center rounded-md bg-[#be4f0a] px-4 py-2 text-white hover:bg-[#a3450a] focus:outline-none focus:ring-2 focus:ring-[#be4f0a] focus:ring-offset-2">
+                      <button
+                        className="flex w-full items-center justify-center rounded-md bg-[#be4f0a] px-4 py-2 text-white hover:bg-[#a3450a] focus:outline-none focus:ring-2 focus:ring-[#be4f0a] focus:ring-offset-2"
+                        onClick={() => handleRequestCallback(tour)}
+                      >
                         <Phone className="mr-2 h-4 w-4" /> Request Callback
                       </button>
                     </div>
@@ -267,6 +317,6 @@ export default function Tour() {
           </div>
         </div>
       </div>
-    </main>
+    </motion.main>
   )
 }

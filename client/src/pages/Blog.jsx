@@ -1,4 +1,30 @@
+"use client"
+
+import { motion } from "framer-motion"
 import { CalendarDays } from "lucide-react"
+import { Link } from "react-router-dom"
+
+// Animation variants
+const pageVariants = {
+  initial: {
+    opacity: 0,
+    y: 20,
+  },
+  in: {
+    opacity: 1,
+    y: 0,
+  },
+  out: {
+    opacity: 0,
+    y: -20,
+  },
+}
+
+const pageTransition = {
+  type: "tween",
+  ease: "anticipate",
+  duration: 0.5,
+}
 
 const blogPosts = [
   {
@@ -59,7 +85,14 @@ const blogPosts = [
 
 export default function Blog() {
   return (
-    <main className="min-h-screen py-16">
+    <motion.main
+      className="min-h-screen py-16"
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={pageVariants}
+      transition={pageTransition}
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-12 text-center">
           <h1 className="text-4xl font-bold text-[#1a1a1a] sm:text-5xl">Our Travel Blog</h1>
@@ -82,14 +115,16 @@ export default function Blog() {
                 </div>
                 <h3 className="mb-2 text-xl font-bold text-[#1a1a1a]">{post.title}</h3>
                 <p className="mb-4 text-[#666666]">{post.description}</p>
-                <button className="w-full rounded-md bg-[#be4f0a] px-4 py-2 text-white hover:bg-[#a3450a] focus:outline-none focus:ring-2 focus:ring-[#be4f0a] focus:ring-offset-2">
-                  Read More
-                </button>
+                <Link to={`/blog/${post.id}`}>
+                  <button className="w-full rounded-md bg-[#be4f0a] px-4 py-2 text-white hover:bg-[#a3450a] focus:outline-none focus:ring-2 focus:ring-[#be4f0a] focus:ring-offset-2">
+                    Read More
+                  </button>
+                </Link>
               </div>
             </div>
           ))}
         </div>
       </div>
-    </main>
+    </motion.main>
   )
 }

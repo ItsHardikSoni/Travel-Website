@@ -13,5 +13,11 @@ export default defineConfig({
   server: {
     port: 3000,
     open: true,
+    // This ensures the dev server properly handles client-side routing
+    historyApiFallback: true,
+  },
+  preview: {
+    // Also for the preview server
+    historyApiFallback: true,
   },
 })
